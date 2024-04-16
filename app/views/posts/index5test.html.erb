@@ -1,0 +1,49 @@
+<script>
+  // var l=console.log.bind(console)
+  //   // Add a custom alias for document.getElementById
+  // document.gei = function(id) {
+  //   return document.getElementById(id);
+  // };
+
+  // Now you can use document.gei instead of document.getElementById
+  // var element = document.gei("yourElementId");
+  // element.innerHTML = "Hello, Custom Alias!";
+  //   var element = gei("yourElementId");
+  // element.innerHTML = "Hello, Custom Alias!";
+  // Add a custom alias for document.getElementById
+  // document.ge = {
+  //   id: function (id) {
+  //     return document.getElementById(id);
+  //   }
+  // };
+
+  // Now you can use document.ge.id instead of document.getElementById
+  var element = document.ge.id("yourElementId");
+  element.innerHTML = "Hello, using ge.id!";
+  // Example usage replacing usual code
+  var myButton = document.getElementById('myButtonId');
+//   click(myButton, function() {
+//   console.log('Button clicked!');
+// });
+</script>
+
+<div id="yourElementId">aaas</div>
+
+<button id="myButtonId">abutton</button>
+
+<script>
+    var myButton = document.getElementById('myButtonId');
+    
+</script>
+
+<!--HTML from anywhere-->
+<div data-controller="exhello">
+  <input data-exhello-target="name" type="text">
+
+  <button data-action="click->exhello#greet">
+    Greet
+  </button>
+
+  <span data-exhello-target="output">
+  </span>
+</div>

@@ -1,0 +1,130 @@
+app/views/posts/index4.html.erb<%# views=>index.html %>
+
+<!-- app/views/shared/_header.html.erb -->
+<header class="bg-black text-white py-2">
+  <div class="container mx-auto flex justify-between items-center">
+    <div>
+      <span class="text-lg font-bold">posts</span>
+    </div>
+    <div class="flex space-x-4">
+      <a href="#" class="hover:text-gray-500">Home</a>
+      <a href="#" class="hover:text-gray-500">Code</a>
+      <a href="#" class="hover:text-gray-500">Login</a>
+    </div>
+
+<%#INSERT1%>
+
+      <%= form_tag(posts_path, method: 'get', class: 'flex items-center') do %>
+        <%= text_field_tag :search, params[:search], placeholder: 'Search posts', class: 'rounded bg-gray-800 text-white px-4 py-2 focus:outline-none focus:shadow-outline' %>
+        <%= submit_tag 'Search', class: 'ml-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline' %>
+      <% end %>
+
+
+  </div>
+</header>
+
+
+
+<!-- app/views/index.html.erb -->
+<p style="color: green"><%= notice %></p>
+
+<h1>posts</h1>
+
+<%= turbo_frame_tag 'targ' do %>
+  <%#= render partial: 'test_partial', locals: { component: @component } %>
+<% end %>
+
+<%#SORTING BY ATTRIBUTE LINKS | WRITE EACH%>
+<%= @posts.first.attributes.keys %>
+<% unless @posts.all? { |c| c[:title].blank? } %>
+  <%= link_to 'title', posts_path(sort_by: 'title', order: (params[:order] == 'asc' && params[:sort_by] == 'title') ? 'desc' : 'asc'), class: 'text-blue-500 hover:text-blue-700' %>
+<% end %>
+
+<% unless @posts.all? { |c| c[:content].blank? } %>
+  <%= link_to 'content', posts_path(sort_by: 'content', order: (params[:order] == 'asc' && params[:sort_by] == 'content') ? 'desc' : 'asc'), class: 'text-blue-500 hover:text-blue-700' %>
+<% end %>
+
+<% unless @posts.all? { |c| c[:created_at].blank? } %>
+  <%= link_to 'created_at', posts_path(sort_by: 'created_at', order: (params[:order] == 'asc' && params[:sort_by] == 'created_at') ? 'desc' : 'asc'), class: 'text-blue-500 hover:text-blue-700' %>
+<% end %>
+
+<br><br>
+
+<%# AUTO-ITERATE TO DISPLAY LINKS TO EACH COMPONENT ATTRIBUTE FOR SORTING | .EACH DO |attr_name|%>
+<% @posts.first.attributes.keys.each do |attr_name| %>
+  <% unless @posts.all? { |c| c[attr_name].blank? } %>
+    <%= link_to attr_name.capitalize, posts_path(sort_by: attr_name, order: (params[:order] == 'asc' && params[:sort_by] == attr_name) ? 'desc' : 'asc'), class: 'text-blue-500 hover:text-blue-700' %>
+  <% end %>
+<% end %>
+
+
+
+
+<!-- app/views/index.html.erb -->
+<%#SHOW postS:INFO%>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <% @posts.each do |post| %>
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <!-- Your post content goes here -->
+      <h2 class="text-lg font-bold mb-2"><%= post.title %></h2>
+      <p class="text-gray-600 mb-4"><%= post.content %></p>
+      <%= link_to "Show this post", post, class: 'text-blue-500 hover:text-blue-700' %>
+
+    </div>
+  <% end %>
+</div>
+
+<!-- Add this modal at the end of your HTML body -->
+<div class="modal fade" id="inspectModal" tabindex="-1" role="dialog" aria-labelledby="inspectModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="inspectModalLabel">Inspect postz 
+        <%# <% if @post_title%> %>
+          <%= @abc %> 
+  <%#       <% end%> %> </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="inspectModalBody">
+        <!-- Content will be dynamically loaded here via AJAX -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div id="posts">
+  <% @posts.each do |post| %>
+    <%= render post %>
+    <p>
+      <%= link_to "Show this post", post %>
+      <%# MODAL WITH HTMX%, turbolinks %>
+      aa
+    </p>
+  <% end %>
+</div>
+
+<div id="replaceme"></div>
+<div id="color-circles">
+  <% @posts.each do |post| %>
+  AA
+    <div class="color-circle" hx-get="/posts/<%= post.id %>" hx-swap="innerHTML" hx-target="#replaceme">
+      <!-- Display your color circles here -->
+      <%= post.title %>
+    </div>
+  <% end %>
+</div>
+
+<div id="selected-color-title">
+  <!-- This div will be updated with the selected color's title -->
+</div>
+
+<div id="targ">
+
+</div>
+
+

@@ -1,0 +1,12 @@
+<p style="color: green"><%= notice %></p>
+<h1>Posts</h1>
+
+<div id="posts">
+    <% @posts.each do |post| %> 
+    <div data-controller="visibility" data-visibility-visible-value="<%= post.visible %>" id="post_<%= post.id %>_container">
+    <%= render post %>
+    <p><%= link_to "New post", new_post_path %></p>
+    </div>
+
+</div>
+<% end %>
