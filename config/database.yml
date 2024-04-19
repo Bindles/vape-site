@@ -21,8 +21,8 @@ default: &default
 
 development:
   <<: *default
-  database: 'stimulus_col_db_dev'
-  username: 'stimulus_col_admin'
+  database: 'vapes_db_dev'
+  username: 'vapes_admin'
   password: 'password'
 
   # The specified database role being used to connect to PostgreSQL.
@@ -84,4 +84,5 @@ production:
   database: td_stimulus_collection_production
   username: td_stimulus_collection
   password: <%= ENV["TD_STIMULUS_COLLECTION_DATABASE_PASSWORD"] %>
+
 
