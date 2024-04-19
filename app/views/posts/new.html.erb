@@ -79,7 +79,11 @@
               const productInfoHTML = `
                 <li><strong>ID:</strong> ${product['id']}</li>
                 <li><strong>Title:</strong> ${product['title']}</li>
+                <li><strong>Handle:</strong> ${product['handle']}</li>
+                <li><strong>Brand:</strong> ${product['vendor']}</li>
                 <li><strong>Type:</strong> ${product['product_type']}</li>
+                <li><strong>Image Url:</strong> ${product['image']['src']}</li>
+                <li><strong>Image:</strong> <img src="${product['image']['src']}" height="160" width="160"></li>
                 <li><strong>Body HTML:</strong> ${product['body_html']}</li>
                 <li><strong>Vendor:</strong> ${product['vendor']}</li>
                 <li><strong>Options:</strong>
