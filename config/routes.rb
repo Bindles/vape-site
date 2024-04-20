@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "posts#index"
+  resources :products
   resources :posts
   
   get 'index2' => 'posts#index2'
@@ -12,4 +12,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+    #root "posts#index"
+    root "products#new"
 end
